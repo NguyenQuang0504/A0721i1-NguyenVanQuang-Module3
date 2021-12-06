@@ -56,4 +56,4 @@ insert into order_detail values
 select * from `order`;
 select * from order_detail inner join product on product.p_id = order_detail.p_id inner join `order` on `order`.o_id = order_detail.o_id inner join customer on customer.c_id = `order`.c_id;
 select * from `order` right join customer on (customer.c_id = `order`.c_id);
-select * from order_detail inner join `order` on `order`.o_id = order_detail.o_id;
+select * from order_detail inner join `order` on `order`.o_id = order_detail.o_id ;
