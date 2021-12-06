@@ -69,4 +69,4 @@ select * from subject where credit between 3 and 5;
 set SQL_SAFE_UPDATE=0;
 update student set id_class = 2 where student_name = "Quang"; 
 set SQL_SAFE_UPDATE = 1;
-select * from mark inner join student on student.id_student = mark.sub_id inner join subject on mark.sub_id = subject.sub_id order by mark;
+select student_name, sub_name, mark from mark inner join student on student.id_student = mark.sub_id inner join subject on mark.sub_id = subject.sub_id order by mark;

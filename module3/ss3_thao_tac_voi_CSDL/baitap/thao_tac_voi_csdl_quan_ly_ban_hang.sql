@@ -43,17 +43,14 @@ foreign key (p_id) references product(p_id)
 select * from order_detail;
 insert into order_detail values 
 (3,1,1),
-(7,1,3),
-(1,2,1),
 (8,3,1),
 (4,2,5);
 
 -- Hiển thị các thông tin  gồm oID, oDate, oPrice của tất cả các hóa đơn trong bảng Order
+select `order`.o_id, o_date, p_price from order_detail inner join product on product.p_id = order_detail.p_id inner join `order` on `order`.o_id = order_detail.o_id inner join customer on customer.c_id = `order`.c_id;
 -- Hiển thị danh sách các khách hàng đã mua hàng, và danh sách sản phẩm được mua bởi các khách
+select c_name, `order`.o_id, o_date, p_name, product.p_id from `order` inner join order_detail on `order`.o_id = order_detail.o_id inner join customer on `order`.c_id=customer.c_id inner join product on order_detail.p_id = product.p_id; 
 -- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
+select * from customer where not exists(select * from customer inner join `order` on customer.c_id = `order`.c_id);
 -- Hiển thị mã hóa đơn, ngày bán và giá tiền của từng hóa đơn (giá một hóa đơn được tính bằng tổng giá bán của từng loại mặt hàng xuất hiện trong hóa đơn. Giá bán của từng loại được tính = odQTY*pPrice)
-
-select * from `order`;
-select * from order_detail inner join product on product.p_id = order_detail.p_id inner join `order` on `order`.o_id = order_detail.o_id inner join customer on customer.c_id = `order`.c_id;
-select * from `order` right join customer on (customer.c_id = `order`.c_id);
-select * from order_detail inner join `order` on `order`.o_id = order_detail.o_id ;
+select od_qty*p_price as total, o_date, order_detail.o_id from order_detail inner join product on order_detail.p_id = product.p_id  inner join `order` on `order`.o_id = order_detail.o_id ;
