@@ -57,10 +57,11 @@ insert into mark(sub_id, id_student, mark) values
 (1,2,7),
 (3,1,8),
 (2,3,6);
-
+select * from subject;
 -- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.
-select max(credit) from subject;
+select max(credit), sub_name from subject;
 -- Hiển thị các thông tin môn học có điểm thi lớn nhất.
-select max(mark) from mark ;
+select * from mark;
+select max(mark) from mark;
 -- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
 select avg(mark) as diemtb, student_name from mark inner join student on mark.id_student = student.id_student group by student.id_student order by diemtb desc;
