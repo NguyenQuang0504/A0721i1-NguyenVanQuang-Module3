@@ -188,3 +188,33 @@ insert into hop_dong_chi_tiet values
 (6,1,3,1),
 (7,2,2,1),
 (8,2,2,12);
+select * from nhan_vien;
+-- 2.Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
+select * from nhan_vien where (nhan_vien.ho_ten_nv like "K%" or nhan_vien.ho_ten_nv like "T%" or nhan_vien.ho_ten_nv like "H%")
+and char_length(nhan_vien.ho_ten_nv)<=15;
+
+-- 3.Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.
+select * from khach_hang where ((datediff("2021-12-10",khach_hang.ngay_sinh_kh)/365) between 18 and 50) 
+and dia_chi_kh like "% Đà Nãng" or dia_chi_kh like "% Quảng Trị";
+
+-- 4.Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng.
+-- Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+select count(khach_hang.ma_kh) as so_lan_dp, loai_khach.ten_lk, khach_hang.ten_kh, khach_hang.email_kh, khach_hang.gioi_tinh, khach_hang.so_cmnd_kh, khach_hang.so_cmnd_kh, loai_dich_vu.ten_ldv 
+from (khach_hang inner join hop_dong on khach_hang.ma_kh = hop_dong.ma_kh 
+inner join dich_vu on hop_dong.ma_dv = dich_vu.ma_dv
+inner join loai_dich_vu on dich_vu.ma_ldv = loai_dich_vu.ma_ldv
+inner join loai_khach on loai_khach.ma_lk = khach_hang.ma_lk)
+where loai_khach.ten_lk = "Diamond" group by (khach_hang.ma_kh) order by so_lan_dp;
+
+-- 5.Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien 
+-- (Với tổng tiền được tính theo công thức như sau: Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) 
+-- cho tất cả các khách hàng đã từng đặt phòng. (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+select khach_hang.ma_kh, khach_hang.ten_kh, ten_lk,hop_dong.ma_hd, ngay_lam, ngay_kt, ten_dv , (dich_vu_di_kem.gia*hop_dong_chi_tiet.so_luong)+chi_phi as total
+from khach_hang left join hop_dong on khach_hang.ma_kh = hop_dong.ma_kh 
+left join loai_khach on loai_khach.ma_lk = khach_hang.ma_lk
+left join dich_vu on dich_vu.ma_dv = hop_dong.ma_dv
+left join hop_dong_chi_tiet on hop_dong.ma_hd = hop_dong_chi_tiet.ma_hd
+left join dich_vu_di_kem on hop_dong_chi_tiet.ma_dvdk = dich_vu_di_kem.ma_dvdk;
+
+-- 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu 
+-- của tất cả các loại dịch vụ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3).
