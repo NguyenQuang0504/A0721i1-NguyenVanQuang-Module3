@@ -269,4 +269,39 @@ and (dia_chi_kh like "%, Vinh" or dia_chi_kh like "%, Quảng Ngãi");
 -- 12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu,
 -- so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem), 
 -- tien_dat_coc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021
+select hop_dong.ma_hd, nhan_vien.ho_ten_nv, khach_hang.ten_kh, khach_hang.so_dien_thoai_kh, dich_vu.ten_dv, sum(hop_dong_chi_tiet.so_luong), ngay_lam
+from nhan_vien inner join hop_dong on hop_dong.ma_nv = nhan_vien.ma_nv inner join khach_hang on khach_hang.ma_kh = hop_dong.ma_kh
+inner join dich_vu on dich_vu.ma_dv = hop_dong.ma_dv left join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hd = hop_dong.ma_hd where 
+hop_dong.ngay_lam like "2020-10-%" or hop_dong.ngay_lam like "2020-11-%" or hop_dong.ngay_lam like "2020-12-%" group by hop_dong.ma_hd
+and hop_dong.ma_hd not in (select hop_dong.ma_hd
+from nhan_vien inner join hop_dong on hop_dong.ma_nv = nhan_vien.ma_nv inner join khach_hang on khach_hang.ma_kh = hop_dong.ma_kh
+inner join dich_vu on dich_vu.ma_dv = hop_dong.ma_dv left join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hd = hop_dong.ma_hd where 
+hop_dong.ngay_lam like "2021-01-%" or hop_dong.ngay_lam like "2021-02-%" or hop_dong.ngay_lam like "2021-03-%" or
+hop_dong.ngay_lam like "2021-04-%" or hop_dong.ngay_lam like "2021-05-%" or hop_dong.ngay_lam like "2021-06-%");
 
+-- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
+-- (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+create view table_view as
+(select sum(so_luong) as max, dich_vu_di_kem.ma_dvdk, ten_dvdk from khach_hang 
+inner join hop_dong on khach_hang.ma_kh = hop_dong.ma_kh
+inner join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hd = hop_dong.ma_hd 
+inner join dich_vu_di_kem on dich_vu_di_kem.ma_dvdk = hop_dong_chi_tiet.ma_dvdk 
+group by hop_dong_chi_tiet.ma_dvdk);
+select * from table_view where max = 15;
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. 
+-- Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
+select count(so_luong) as so_lan_sd, hop_dong.ma_hd, ten_dvdk from khach_hang 
+inner join hop_dong on khach_hang.ma_kh = hop_dong.ma_kh
+inner join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hd = hop_dong.ma_hd 
+inner join dich_vu_di_kem on dich_vu_di_kem.ma_dvdk = hop_dong_chi_tiet.ma_dvdk 
+group by hop_dong_chi_tiet.ma_dvdk having so_lan_sd = 1;
+
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm 
+-- ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+
+select nhan_vien.ma_nv, nhan_vien.ho_ten_nv, trinh_do.ten_td, nhan_vien.so_dt, nhan_vien.dia_chi 
+from nhan_vien inner join hop_dong on hop_dong.ma_nv = nhan_vien.ma_nv inner join trinh_do on trinh_do.ma_td = nhan_vien.ma_td 
+group by nhan_vien.ma_nv having count(nhan_vien.ma_nv) = 1;
+
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
