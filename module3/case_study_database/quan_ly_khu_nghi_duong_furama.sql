@@ -305,3 +305,18 @@ from nhan_vien inner join hop_dong on hop_dong.ma_nv = nhan_vien.ma_nv inner joi
 group by nhan_vien.ma_nv having count(nhan_vien.ma_nv) = 1;
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+set SQL_SAFE_UPDATES = 0;
+delete from nhan_vien where not exists(
+select nhan_vien.ma_nv from hop_dong where hop_dong.ngay_lam between "2019-01-01" and "2021-12-31"
+and nhan_vien.ma_nv = hop_dong.ma_nv);
+set SQL_SAFE_UPDATES = 1;
+select * from nhan_vien;
+
+-- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+update khach_hang,(select hop_dong.ma_kh as id, sum(hop_dong.tien_dat) as tong_tien from hop_dong where year(hop_dong.ngay_lam) = 2021
+group by hop_dong.ma_kh having tong_tien > 10000000) as temp set khach_hang.ma_lk = (select loai_khach.ma_lk from loai_khach where loai_khach.ten_lk = "Diamond")
+where khach_hang.ma_lk = (select loai_khach.ma_lk from loai_khach where loai_khach.ten_lk = "Platinum")
+and temp.id = khach_hang.ma_kh;
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
