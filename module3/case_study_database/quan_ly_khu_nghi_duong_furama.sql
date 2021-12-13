@@ -320,3 +320,19 @@ where khach_hang.ma_lk = (select loai_khach.ma_lk from loai_khach where loai_kha
 and temp.id = khach_hang.ma_kh;
 
 -- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+set SQL_SAFE_UPDATES = 0;
+update dich_vu_di_kem inner join (select dich_vu_di_kem.ten_dvdk as ten_dvdk from 
+hop_dong_chi_tiet inner join dich_vu_di_kem on dich_vu_di_kem.ma_dvdk = hop_dong_chi_tiet.ma_dvdk group by dich_vu_di_kem.ma_dvdk having count(hop_dong_chi_tiet.ma_dvdk)
+>10) as temp set dich_vu_di_kem.gia = dich_vu_di_kem.gia*2 where dich_vu_di_kem.ten_dvdk = temp.ten_dvdk;
+set SQL_SAFE_UPDATES = 1;
+select * from dich_vu_di_kem;
+
+-- 20.Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang),
+-- ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+select nhan_vien.ma_nv as id, nhan_vien.ho_ten_nv as ho_ten, nhan_vien.email as email, nhan_vien.so_dt as sdt, nhan_vien.ngay_sinh as ngay_sinh, nhan_vien.dia_chi as dia_chi,
+"nhan_vien" as Person from nhan_vien
+union all
+select khach_hang.ma_kh as id, khach_hang.ten_kh as ho_ten, khach_hang.email_kh as email, khach_hang.so_dien_thoai_kh as sdt, khach_hang.ngay_sinh_kh as ngay_sinh, khach_hang.dia_chi_kh as dia_chi,
+"khach_hang" as Person from khach_hang;
