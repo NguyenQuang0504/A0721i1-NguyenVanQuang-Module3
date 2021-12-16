@@ -6,21 +6,29 @@
     position: fixed;
     top: 0;
     left: 0px;
+    z-index: 100;
 }
 .opction-header{
 margin-top: 25px;
 display: inline-block;
 }
-.opction-header li {
+.opction-header .li-ul {
     position: relative;
     display: inline;
     padding: 20px;
     font-size: 20px;
+    font-weight: 700;
 }
-.opction-header li:hover{
-    background-color: black;
+.opction-header .li-ul a{
+    text-decoration: none;
+    color: black;
+}
+.opction-header .li-ul:hover a{
     color: wheat;
-    box-shadow: 1px 1px 1px 5px #a2a2a2;
+}
+.opction-header .li-ul:hover{
+    background-color: black;
+    cursor: pointer;
 }
 .content-header{
     font-size: 50px;
@@ -32,6 +40,87 @@ display: inline-block;
     text-align: center;
     margin-top: 5px;
 }
+.opction-header .li-ul:hover .opction{
+    display: block;
+}
+.opction{
+    display: none;
+    position: absolute;
+    background-color: orange;
+    width: 200px;
+    margin-top: 22px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    box-shadow: 3px 3px 3px black;
+}
+.opction li{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 26px;
+}
+.opction li a {
+    text-decoration: none;
+    color: wheat;
+}
+.opction li:hover{
+    background-color: black;
+    color: navajowhite;
+    cursor: pointer;
+}
+.opction li:active{
+    background-color: wheat;
+    color: black;
+}
+#search{
+    background: url("img/hinh-anh-bau-troi-3d-anime-dep-nhat_022455569.jpg") top center / cover no-repeat;;
+    margin-top: 70px;
+    color: blue;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 350px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+#search p{
+    color: black;
+    font-weight: 700;
+    font-family: Tahoma;
+    margin-top: 100px;
+}
+#search #search-input{
+    width: 500px;
+    height: 30px;
+    border-radius: 15px;
+}
 #body{
-
+    padding-top: 393px;
+    margin-left: -8px;
+}
+.horror-stories{
+    padding-top: 75px;
+    padding-left: 33px;
+    width: 100%;
+    text-align: center;
+    background-color: #aaaaaa;
+}
+.horror-stories tr{
+    width: 100%;
+    text-align: center;
+}
+.horror-stories td{
+    padding: 40px;
+}
+.horror-stories td p {
+    font-family: Tahoma;
+    font-weight: 500;
+    font-size: 150%;
+}
+.horror-stories td:hover{
+    background-color: rgba(248, 236, 182, 0.7);
+    cursor: pointer;
+}
+#novel .horror-stories{
+    background-color: #7ef7ff;
 }
