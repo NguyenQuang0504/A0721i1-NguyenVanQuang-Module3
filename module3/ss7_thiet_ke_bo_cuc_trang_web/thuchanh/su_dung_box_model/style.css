@@ -1,0 +1,28 @@
+#box{
+    width: 800px;
+    height: 400px;
+    padding: 10px;
+    border-color: black green blue red;
+    border-style: solid;
+}
+.text1{
+    border-style: dashed;
+    border-color: darkred;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+}
+.text2{
+    border-style: dashed;
+    border-color: darkred;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+}
+.text3{
+    border-style: dashed;
+    border-color: darkred;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+}
