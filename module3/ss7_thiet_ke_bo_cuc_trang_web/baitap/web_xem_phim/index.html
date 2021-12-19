@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            /*content-box: width và height chỉ là của content*/
+            /*border-box: width là bao gồm của padding, content và border*/
+            box-sizing: border-box;
+        }
+        .title {
+            background-color: red;
+            color: white;
+            font-size: 50px;
+        }
+        .col-1 {width: 8.33%}
+        .col-2 {width: 16.66%}
+        .col-3 {width: 25%}
+        .col-4 {width: 33.3%}
+        .col-5 {width: 41.66%}
+        .col-6 {width: 50%}
+        .col-7 {width: 58.33%}
+        .col-8 {
+            width: 66.66%;}
+        .col-9 {
+            width: 75%;}
+        .col-10 {
+            width: 83.33%;}
+        .col-11 {
+            width: 91.66%;
+        }
+        .col-12 {
+            width: 100%;
+        }
+        .row {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+        }
+
+        @media screen and (max-width: 1000px) {
+            [class*="col-"] {
+                width: 50%;
+            }
+            .title {
+                background-color: blue;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            [class*="col-"] {
+                width: 100%;
+            }
+            .title {
+                background-color: black;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <span class="title">Phim hoạt hình</span>
+    </div>
+    <div>
+        <div>
+            Phim hoạt hình|Phim hoạt hình yêu thích||Nhân vật hoạt hình | Góp ý
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div>
+                <div>
+                    <video width="100%" controls>
+                        <source src="movie.mp4" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                        Not view video
+                    </video>
+                    <h4>Title Video</h4>
+                    <p>Chanel fun</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <video width="100%" controls>
+                        <source src="movie.mp4" type="video/mp4">
+                        <source src="movie.ogg" type="video/ogg">
+                        Not view video
+                    </video>
+                    <h4>Title Video</h4>
+                    <p>Chanel fun</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <video width="100%" controls>
+                    <source src="movie.mp4" type="video/mp4">
+                    <source src="movie.ogg" type="video/ogg">
+                    Not view video
+                </video>
+                <h4>Title Video</h4>
+                <p>Chanel fun</p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="footer">
+    <h1>END</h1>
+</div>
+</body>
