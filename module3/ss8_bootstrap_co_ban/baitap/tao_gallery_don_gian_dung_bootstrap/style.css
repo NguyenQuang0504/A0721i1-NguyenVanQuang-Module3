@@ -1,0 +1,19 @@
+h4{
+    font-family: "Times New Roman";
+    font-weight: 700;
+    line-height: 50px;
+}
+p{
+    font-family: "Times New Roman";
+    font-weight: 700;
+    line-height: 50px;
+}
+.row{
+    margin-left: 50px;
+}
+.card{
+    margin-left: 20px;
+}
+span{
+    width: 100%;
+}
