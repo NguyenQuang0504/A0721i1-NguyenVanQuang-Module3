@@ -9,21 +9,49 @@
     height: 50px;
     background-color: black;
 }
-#header ul{
+#header #subnav1{
     margin-left: 20px;
 }
-#header ul li{
+#header #subnav1> li{
     display: inline-block;
     line-height: 50px;
 }
-#header ul li a{
+#header #subnav1>li>a{
     text-decoration: none;
     color: white;
     font-size: 20px;
     display: inline-block;
     padding: 0 15px;
 }
-#header ul li:hover a{
+#header #subnav1>li:hover>a{
+    background-color: wheat;
+    color: black;
+}
+#subnav1 li:hover #subnav2{
+    display: block;
+}
+#subnav2{
+    position: absolute;
+    background-color: black;
+    top: 50px;
+    width: 165px;
+    height: 173px;
+    padding-top: 10px;
+    padding-left: 5px;
+    display: none;
+}
+#subnav2 li{
+    list-style-type: none;
+}
+#subnav2>li>a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 0 15px;
+    margin-left: -5px;
+}
+#subnav2 li:hover a{
     background-color: wheat;
     color: black;
 }
