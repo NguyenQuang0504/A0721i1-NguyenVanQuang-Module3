@@ -14,4 +14,6 @@ public interface ICustomerRespository {
     void delete(String id);
 
     void create(String id, String name, String dateOfBirth);
+
+    Customer findByName(String name_find);
 }

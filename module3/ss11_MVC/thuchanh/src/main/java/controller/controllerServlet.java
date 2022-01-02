@@ -44,6 +44,14 @@ public class controllerServlet extends javax.servlet.http.HttpServlet {
                     request.setAttribute("Noti", "Create Fail");
                     request.getRequestDispatcher("/DisplayList.jsp").forward(request, response);
                 }
+                break;
+            }
+            case "Find":{
+                String name_find = request.getParameter("name_find");
+                Customer customer = iCustomerService.findByName(name_find);
+                request.setAttribute("customer1", customer);
+                request.getRequestDispatcher("/DisplayCustomer.jsp").forward(request, response);
+                break;
             }
         }
     }
@@ -68,9 +76,15 @@ public class controllerServlet extends javax.servlet.http.HttpServlet {
                 customerList = iCustomerService.findAll();
                 request.setAttribute("listCustomer", customerList);
                 request.getRequestDispatcher("/DisplayList.jsp").forward(request, response);
+                break;
             }
             case "Create":{
                 request.getRequestDispatcher("/Create.jsp").forward(request, response);
+                break;
+            }
+            case "Find":{
+                request.getRequestDispatcher("/Find.jsp").forward(request, response);
+                break;
             }
             default:{
                 List<Customer> customerList = new ArrayList<>();

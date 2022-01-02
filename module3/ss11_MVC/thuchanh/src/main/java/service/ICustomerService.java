@@ -14,4 +14,6 @@ public interface ICustomerService {
     void delete(String id);
 
     boolean create(String id, String name, String dateOfBirth);
+
+    Customer findByName(String name_find);
 }

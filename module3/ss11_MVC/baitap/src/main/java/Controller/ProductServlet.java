@@ -216,7 +216,6 @@ public class ProductServlet extends HttpServlet {
         double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
         String supply = req.getParameter("supply");
-
         Product product = this.productService.findById(id);
         RequestDispatcher dispatcher;
         if (product==null){
@@ -263,6 +262,5 @@ public class ProductServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 }

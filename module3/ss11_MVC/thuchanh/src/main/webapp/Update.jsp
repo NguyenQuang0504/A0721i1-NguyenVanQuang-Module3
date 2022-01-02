@@ -10,8 +10,14 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        form{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+<h1>Update khach hang</h1>
 <form action="" method="post">
    ID: <span><c:out value="${list.id}"></c:out></span>
    NAME: <input type="text" value="${list.name}" name="name">

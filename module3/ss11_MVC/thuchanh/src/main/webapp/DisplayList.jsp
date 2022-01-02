@@ -15,6 +15,12 @@
             border-collapse: collapse;
             border: 1px solid red;
         }
+        table{
+            width: 100%;
+        }
+        td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +47,7 @@
         </c:forEach>
     </table>
     <button><a href="/servlet?action=Create">Create Customer</a></button>
+    <button><a href="/servlet?action=Find">Find Customer</a></button>
     <h1 style="color: red"><c:out value="${Noti}"></c:out></h1>
 </center>
 </body>

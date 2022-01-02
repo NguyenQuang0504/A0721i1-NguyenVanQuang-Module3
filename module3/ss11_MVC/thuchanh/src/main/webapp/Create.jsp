@@ -10,6 +10,12 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        form{
+            width: 100%;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 <form action="" method="post">

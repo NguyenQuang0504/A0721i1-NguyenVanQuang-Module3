@@ -57,4 +57,14 @@ public class CustomerRespository implements ICustomerRespository {
         Integer temp = Integer.parseInt(id);
         list.add(new Customer(temp, name, dateOfBirth));
     }
+
+    @Override
+    public Customer findByName(String name_find) {
+        for (Customer list1: list){
+            if(list1.getName().equals(name_find)){
+                return list1;
+            }
+        }
+        return null;
+    }
 }
