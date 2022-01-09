@@ -38,6 +38,14 @@ public class controllerServlet extends HttpServlet {
                 iCustomerService.create(id, name, gender, dateOfBirth, address);
                 ArrayList<Customer> listCustomer = iCustomerService.display();
                 request.getRequestDispatcher("Note.jsp").forward(request, response);
+                break;
+            }
+            case "delete":{
+                String id = request.getParameter("id");
+                iCustomerService.deleteById(id);
+                ArrayList<Customer> listCustomer = iCustomerService.display();
+                request.getRequestDispatcher("Note.jsp").forward(request, response);
+                break;
             }
         }
     }
@@ -53,7 +61,10 @@ public class controllerServlet extends HttpServlet {
                 break;
             }
             case "delete":{
+                ArrayList<Customer> list = iCustomerService.display();
+                request.setAttribute("list", list);
                 request.getRequestDispatcher("/Delete.jsp").forward(request, response);
+                response.sendRedirect("/Delete.jsp");
                 break;
             }
             case "create":{

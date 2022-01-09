@@ -28,4 +28,9 @@ public class CustomerService implements ICustomerService {
     public void create(String id, String name, String gender, String dateOfBirth, String address) {
         iCustomer.create(id, name, gender, dateOfBirth, address);
     }
+
+    @Override
+    public void deleteById(String id) {
+        iCustomer.deleteById(id);
+    }
 }

@@ -50,4 +50,15 @@ public class CustomerRepository implements ICustomer {
         Customer customer = new Customer(Integer.parseInt(id), name, Integer.parseInt(gender), dateOfBirth, address);
         list.add(customer);
     }
+
+    @Override
+    public void deleteById(String id) {
+        Integer temp = Integer.parseInt(id);
+        for (int i=0; i< list.size();i++){
+            if (list.get(i).getId().equals(temp)){
+                list.remove(i);
+                break;
+            }
+        }
+    }
 }
