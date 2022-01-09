@@ -19,17 +19,19 @@
 </head>
 <body>
     <h1>Update</h1>
-    <form action="update" method="update">
+    <form method="post">
     <table>
         <tr>
             <td>ID: </td>
+            <td>
             <select name="id">
                 <c:forEach var="customer" items="${ListCustomer}">
-                    <option>
-                        <p><c:out value="${customer.id}"></c:out></p>
+                    <option value="${customer.id}">
+                            <c:out value="${customer.id}"></c:out>
                     </option>
                 </c:forEach>
             </select>
+            </td>
         </tr>
         <tr>
             <td>Name: </td>
@@ -39,8 +41,8 @@
             <td>Gender: </td>
             <td>
                 <select name="gender" id="" style="width: 50px">
-                    <option><p>1</p></option>
-                    <option><p>2</p></option>
+                    <option value="1"><p>1</p></option>
+                    <option value="2"><p>2</p></option>
                 </select>
             </td>
         </tr> <tr>

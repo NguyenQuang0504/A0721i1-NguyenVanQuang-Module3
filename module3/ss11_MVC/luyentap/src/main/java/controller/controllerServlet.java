@@ -18,13 +18,26 @@ public class controllerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         switch (action){
-            case "update" :{
-                ArrayList<Customer> listCustomer = iCustomerService.display();
-                request.setAttribute("ListCustomer", listCustomer);
-                request.getRequestDispatcher("/Update.jsp").forward(request, response);
+            case "update":{
                 String id = request.getParameter("id");
-               Customer customer = iCustomerService.findById(id);
-
+                String name = request.getParameter("name");
+                String gender = request.getParameter("gender");
+                String dateOfBirth = request.getParameter("dateOfBirth");
+                String address = request.getParameter("address");
+                 Customer customer = iCustomerService.findById(id);
+                iCustomerService.update(id, name, gender, dateOfBirth,address);
+                request.getRequestDispatcher("/Note.jsp").forward(request, response);
+                break;
+            }
+            case "create":{
+                String id = request.getParameter("id");
+                String name = request.getParameter("name");
+                String gender = request.getParameter("gender");
+                String dateOfBirth = request.getParameter("dateOfBirth");
+                String address = request.getParameter("address");
+                iCustomerService.create(id, name, gender, dateOfBirth, address);
+                ArrayList<Customer> listCustomer = iCustomerService.display();
+                request.getRequestDispatcher("Note.jsp").forward(request, response);
             }
         }
     }
@@ -33,7 +46,10 @@ public class controllerServlet extends HttpServlet {
         String action = request.getParameter("action");
         switch (action){
             case "update":{
+                ArrayList<Customer> listCustomer = iCustomerService.display();
+                request.setAttribute("ListCustomer", listCustomer);
                 request.getRequestDispatcher("/Update.jsp").forward(request, response);
+                response.sendRedirect("/Update.jsp");
                 break;
             }
             case "delete":{

@@ -30,4 +30,24 @@ public class CustomerRepository implements ICustomer {
         }
         return null;
     }
+
+    @Override
+    public void update(String id, String name, String gender, String dateOfBirth, String address) {
+        Integer temp = Integer.parseInt(id);
+        Integer gender1 = Integer.parseInt(gender);
+        for (int i=0;i<list.size();i++){
+            if (list.get(i).getId().equals(temp)){
+                list.get(i).setName(name);
+                list.get(i).setDateOfBirth(dateOfBirth);
+                list.get(i).setAddress(address);
+                list.get(i).setGender(gender1);
+            }
+        }
+    }
+
+    @Override
+    public void create(String id, String name, String gender, String dateOfBirth, String address) {
+        Customer customer = new Customer(Integer.parseInt(id), name, Integer.parseInt(gender), dateOfBirth, address);
+        list.add(customer);
+    }
 }
