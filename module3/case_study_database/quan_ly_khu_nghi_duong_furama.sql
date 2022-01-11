@@ -260,7 +260,7 @@ hop_dong left join hop_dong_chi_tiet on hop_dong.ma_hd = hop_dong_chi_tiet.ma_hd
 dich_vu_di_kem on dich_vu_di_kem.ma_dvdk = hop_dong_chi_tiet.ma_dvdk group by hop_dong.ma_hd;
 
 -- 11.Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
-
+select * from hop_dong_chi_tiet;
 select dich_vu_di_kem.ma_dvdk, dich_vu_di_kem.ten_dvdk, dich_vu_di_kem.gia from dich_vu_di_kem inner join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_dvdk = dich_vu_di_kem.ma_dvdk 
 inner join hop_dong on hop_dong_chi_tiet.ma_hd = hop_dong.ma_hd inner join khach_hang on khach_hang.ma_kh = hop_dong.ma_kh 
 inner join loai_khach on loai_khach.ma_lk = khach_hang.ma_lk where ten_lk = "Diamond" 
@@ -318,7 +318,7 @@ update khach_hang,(select hop_dong.ma_kh as id, sum(hop_dong.tien_dat) as tong_t
 group by hop_dong.ma_kh having tong_tien > 10000000) as temp set khach_hang.ma_lk = (select loai_khach.ma_lk from loai_khach where loai_khach.ten_lk = "Diamond")
 where khach_hang.ma_lk = (select loai_khach.ma_lk from loai_khach where loai_khach.ten_lk = "Platinum")
 and temp.id = khach_hang.ma_kh;
-
+select * from loai_khach;
 -- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
 
 -- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.

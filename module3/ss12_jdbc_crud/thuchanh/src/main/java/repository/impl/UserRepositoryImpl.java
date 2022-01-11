@@ -1,0 +1,51 @@
+package repository.impl;
+
+import model.User;
+import repository.IUserRepository;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserRepositoryImpl implements IUserRepository {
+   private BaseRepository baseRepository = new BaseRepository();
+
+    @Override
+    public ArrayList<User> display() {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from users");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            User user;
+            while(resultSet.next()){
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setCountry(resultSet.getString("country"));
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public void create(String id, String name, String email, String country) {
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("insert into users(id ,name, email, country) values(?,?,?,?)");
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.setString(2,name);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,country);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

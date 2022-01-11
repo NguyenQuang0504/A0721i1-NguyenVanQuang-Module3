@@ -17,6 +17,9 @@
     <button><a href="/controllerServlet?action=update">Update</a></button>
     <button><a href="/controllerServlet?action=delete">Delete</a></button>
     <button><a href="/controllerServlet?action=create">Create</a></button>
+    <button>
+      <a href="/controllerServlet?action=find">Search</a>
+    </button>
   </center>
   </body>
 </html>

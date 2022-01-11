@@ -11,8 +11,21 @@
 <head>
     <title>Title</title>
     <style>
-        select , option{
-            height: 50px;
+        table{
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        button{
+            width: 50px;
+            height: 70px;
+            color: black;
+            border: none;
+            background-color: red;
         }
     </style>
 </head>
@@ -24,6 +37,13 @@
         <c:forEach var="listCustomer" items="${list}">
         <option value="${listCustomer.id}">
             <table>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Gender</td>
+                    <td>DateOfBirth</td>
+                    <td>Address</td>
+                </tr>
                 <tr>
                     <td>
                        <c:out value="${listCustomer.id}"></c:out>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "controllerServlet", urlPatterns = {"/controllerServlet"})
 public class controllerServlet extends HttpServlet {
@@ -47,6 +48,13 @@ public class controllerServlet extends HttpServlet {
                 request.getRequestDispatcher("Note.jsp").forward(request, response);
                 break;
             }
+            case "find":{
+               String id = request.getParameter("id");
+               Customer customer = iCustomerService.findById(id);
+               request.setAttribute("customer", customer);
+               request.getRequestDispatcher("/search.jsp").forward(request, response);
+               response.sendRedirect("/search.jsp");
+            }
         }
     }
 
@@ -73,6 +81,10 @@ public class controllerServlet extends HttpServlet {
             }
             case "index":{
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
+                break;
+            }
+            case"find":{
+                request.getRequestDispatcher("/find.jsp").forward(request, response);
                 break;
             }
             default:{
