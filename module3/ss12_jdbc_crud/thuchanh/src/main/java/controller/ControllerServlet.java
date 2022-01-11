@@ -31,12 +31,39 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/display.jsp").forward(request, response);
                 response.sendRedirect("/display.jsp");
             }
+            case "update1":{
+                String id = request.getParameter("id");
+                String name = request.getParameter("name");
+                String email = request.getParameter("email");
+                String country = request.getParameter("country");
+                userService.update(id, name, email, country);
+                ArrayList<User> list = new ArrayList<>();
+                list = userService.display();
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/display.jsp").forward(request, response);
+                response.sendRedirect("/display.jsp");
+            }
+            case "delete":{
+                String id = request.getParameter("id");
+                userService.delete(id);
+                ArrayList<User> list = new ArrayList<>();
+                list = userService.display();
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/display.jsp").forward(request, response);
+                response.sendRedirect("/display.jsp");
+            }
+            case "findByCountry":{
+                String country = request.getParameter("country");
+                ArrayList<User> user = userService.findByCountry(country);
+                request.setAttribute("list", user);
+                request.getRequestDispatcher("/display_find.jsp").forward(request, response);
+                response.sendRedirect("/display_find.jsp");
+            }
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        System.out.println(action);
         switch (action){
             case "display":{
                 ArrayList<User> list = new ArrayList<>();
@@ -50,14 +77,33 @@ public class ControllerServlet extends HttpServlet {
                 response.sendRedirect("/create.jsp");
             }
             case "update":{
-
+                ArrayList<User> list = new ArrayList<>();
+                list = userService.display();
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/update.jsp").forward(request, response);
+                response.sendRedirect("/update.jsp");
             }
             case "delete":{
-
+                ArrayList<User> list = new ArrayList<>();
+                list = userService.display();
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/delete.jsp").forward(request, response);
+                response.sendRedirect("/delete.jsp");
+            }
+            case "update1":{
+                String id = request.getParameter("id");
+                User user = userService.findById(id);
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("/update_input.jsp").forward(request, response);
+                response.sendRedirect("/update_input.jsp");
             }
             case "index":{
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
                 response.sendRedirect("/index.jsp");
+            }
+            case "findByCountry":{
+                request.getRequestDispatcher("/find.jsp").forward(request, response);
+                response.sendRedirect("/find.jsp");
             }
         }
     }

@@ -26,6 +26,9 @@
         <td>
           <button><a href="/controllerServlet?action=delete">Delete</a> </button>
         </td>
+          <td>
+              <button><a href="/controllerServlet?action=findByCountry">FindByCountry</a> </button>
+          </td>
       </tr>
     </table>
   </center>
