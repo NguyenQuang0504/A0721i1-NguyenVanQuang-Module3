@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserRepositoryImpl implements IUserRepository {
    private BaseRepository baseRepository = new BaseRepository();
@@ -115,6 +114,29 @@ public class UserRepositoryImpl implements IUserRepository {
                 usersList.add(user);
             }
             return usersList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<User> sort() {
+        ArrayList<User> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from users order by `name`");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            User user;
+            while(resultSet.next()){
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setCountry(resultSet.getString("country"));
+                list.add(user);
+            }
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
         }

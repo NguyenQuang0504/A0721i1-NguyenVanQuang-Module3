@@ -105,6 +105,12 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/find.jsp").forward(request, response);
                 response.sendRedirect("/find.jsp");
             }
+            case "sort":{
+               ArrayList<User> user = userService.sort();
+                request.setAttribute("list", user);
+                request.getRequestDispatcher("/display.jsp").forward(request, response);
+                response.sendRedirect("/display.jsp");
+            }
         }
     }
 }

@@ -3,7 +3,6 @@ package service;
 import model.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface IUserService {
     ArrayList<User> display();
@@ -17,4 +16,6 @@ public interface IUserService {
     void delete(String id);
 
     ArrayList<User> findByCountry(String country);
+
+    ArrayList<User> sort();
 }

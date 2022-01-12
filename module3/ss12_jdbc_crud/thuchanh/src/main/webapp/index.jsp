@@ -29,6 +29,9 @@
           <td>
               <button><a href="/controllerServlet?action=findByCountry">FindByCountry</a> </button>
           </td>
+          <td>
+              <button><a href="/controllerServlet?action=sort">SortByName</a> </button>
+          </td>
       </tr>
     </table>
   </center>

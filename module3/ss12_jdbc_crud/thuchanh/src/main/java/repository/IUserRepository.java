@@ -3,7 +3,6 @@ package repository;
 import model.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface IUserRepository {
     ArrayList<User> display();
@@ -17,4 +16,6 @@ public interface IUserRepository {
     void delete(String id);
 
     ArrayList<User> findByCountry(String country);
+
+    ArrayList<User> sort();
 }

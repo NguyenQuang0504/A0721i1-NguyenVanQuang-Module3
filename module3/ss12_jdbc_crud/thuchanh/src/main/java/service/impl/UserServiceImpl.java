@@ -4,10 +4,8 @@ import model.User;
 import repository.IUserRepository;
 import repository.impl.UserRepositoryImpl;
 import service.IUserService;
-import sun.net.www.protocol.file.FileURLConnection;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserServiceImpl implements IUserService {
     public IUserRepository iUserRepository = new UserRepositoryImpl();
@@ -40,5 +38,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ArrayList<User> findByCountry(String country) {
         return iUserRepository.findByCountry(country);
+    }
+
+    @Override
+    public ArrayList<User> sort() {
+       return iUserRepository.sort();
     }
 }
