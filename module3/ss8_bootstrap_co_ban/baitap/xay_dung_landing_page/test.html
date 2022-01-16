@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr = [73,67,38,33,28,38,48];
+    function gradingStudent(grades) {
+        // Write your code here
+        for(let i = 0;i<grades.length;i++) {
+            if(grades[i]>=38) {
+                let a = Math.ceil(grades[i]/5)*5;
+                if((a-grades[i])<3)
+                    grades[i] = a;
+            }
+        }
+    }
+    gradingStudent(arr);
+    alert(arr);
+</script>
+</body>
+</html>

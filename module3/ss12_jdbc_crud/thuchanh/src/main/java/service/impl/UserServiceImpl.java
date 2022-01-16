@@ -44,4 +44,16 @@ public class UserServiceImpl implements IUserService {
     public ArrayList<User> sort() {
        return iUserRepository.sort();
     }
+
+    @Override
+    public boolean check(String element) {
+        ArrayList<User> list = new ArrayList<>();
+        list = display();
+        for (int i = 0; i<list.size();i++){
+            if (list.get(i).getCountry().equals(element)||list.get(i).getName().equals(element)||list.get(i).getEmail().equals(element)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

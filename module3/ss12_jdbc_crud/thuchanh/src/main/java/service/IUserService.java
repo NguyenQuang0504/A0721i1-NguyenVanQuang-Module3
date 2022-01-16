@@ -18,4 +18,5 @@ public interface IUserService {
     ArrayList<User> findByCountry(String country);
 
     ArrayList<User> sort();
+    boolean check(String element);
 }

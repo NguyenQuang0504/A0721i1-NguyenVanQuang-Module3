@@ -54,10 +54,20 @@ public class ControllerServlet extends HttpServlet {
             }
             case "findByCountry":{
                 String country = request.getParameter("country");
-                ArrayList<User> user = userService.findByCountry(country);
-                request.setAttribute("list", user);
-                request.getRequestDispatcher("/display_find.jsp").forward(request, response);
-                response.sendRedirect("/display_find.jsp");
+                if (userService.check(country)) {
+                    String note = "Tim thay!!!";
+                    request.setAttribute("note", note);
+                    ArrayList<User> user = userService.findByCountry(country);
+                    request.setAttribute("list", user);
+                    request.getRequestDispatcher("/display_find.jsp").forward(request, response);
+                    response.sendRedirect("/display_find.jsp");
+                }
+                else {
+                    String note = "Khong tim thay!!!";
+                    request.setAttribute("note", note);
+                    request.getRequestDispatcher("/display_find.jsp").forward(request, response);
+                    response.sendRedirect("/display_find.jsp");
+                }
             }
         }
     }
