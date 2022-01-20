@@ -58,7 +58,7 @@
                 <li><a href="">HOME</a></li>
               </ul>
               <ul>
-                <li><a href="">CUSTOMER</a></li>
+                <li><a href="/CaseStudy?action=display">CUSTOMER</a></li>
               </ul>
               <ul>
                 <li><a href="">EMPLOYEE</a></li>
@@ -67,7 +67,7 @@
                 <li><a href="">CONTRACT</a></li>
               </ul>
               <ul>
-                <li><a href="">SERVICE</a></li>
+                <li><a href="/ServiceServlet?action=display">SERVICE</a></li>
               </ul>
             </div>
           </div>
