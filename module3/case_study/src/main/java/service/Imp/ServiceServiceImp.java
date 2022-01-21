@@ -13,4 +13,9 @@ public class ServiceServiceImp implements IServiceService {
     public List<Service> display() {
         return iServiceRepository.display();
     }
+
+    @Override
+    public void create(String id, String name, String area, String cost, String numPeople, String standard, String convinient, String idTypeRent, String areaPool,String numFloor, String idServiceType) {
+        iServiceRepository.create(id, name, area, cost, numPeople, standard, convinient, idTypeRent, areaPool, numFloor, idServiceType);
+    }
 }

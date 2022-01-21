@@ -35,4 +35,26 @@ public class ServiceRepositoryImp implements IServiceRepository {
         }
         return null;
     }
+
+    @Override
+    public void create(String id, String name, String area, String cost, String numPeople, String standard, String convinient, String idTypeRent, String areaPool, String numFloor, String idServiceType) {
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("insert into dich_vu values (?,?,?,?,?,?,?,?,?,?,?);");
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.setString(2,name);
+            preparedStatement.setInt(3,Integer.parseInt(area));
+            preparedStatement.setDouble(4, Double.parseDouble(cost));
+            preparedStatement.setInt(5,Integer.parseInt(numPeople));
+            preparedStatement.setString(6, standard);
+            preparedStatement.setString(7,convinient);
+            preparedStatement.setDouble(8,Double.parseDouble(areaPool));
+            preparedStatement.setInt(9, Integer.parseInt(numFloor));
+            preparedStatement.setInt(10,Integer.parseInt(idServiceType));
+            preparedStatement.setInt(11, Integer.parseInt(idTypeRent));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
