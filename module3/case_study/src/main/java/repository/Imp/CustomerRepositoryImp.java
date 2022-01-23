@@ -128,4 +128,25 @@ public class CustomerRepositoryImp implements ICustomerRepository {
         }
         return null;
     }
+
+    @Override
+    public List<CustomerType> findCustomerType() {
+     List<CustomerType> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from loai_khach;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            CustomerType customerType = new CustomerType();
+            while (resultSet.next()){
+                customerType = new CustomerType();
+                customerType.setId(resultSet.getInt("ma_lk"));
+                customerType.setNameCustomerType(resultSet.getString("ten_lk"));
+                list.add(customerType);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

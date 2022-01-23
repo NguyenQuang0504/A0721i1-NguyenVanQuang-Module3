@@ -1,6 +1,8 @@
 package controller;
 
+import model.RentalType;
 import model.Service;
+import model.TypeService;
 import service.IServiceService;
 import service.Imp.ServiceServiceImp;
 
@@ -38,6 +40,23 @@ public class ServiceServlet extends HttpServlet {
                 request.getRequestDispatcher("/display_service.jsp").forward(request, response);
                 break;
             }
+            case "delete":{
+                String id = request.getParameter("id");
+                iServiceService.delete(id);
+                List<Service> services = new ArrayList<>();
+                services = iServiceService.display();
+                request.setAttribute("list", services);
+                request.getRequestDispatcher("/display_service.jsp").forward(request, response);
+                break;
+            }
+            case "search":{
+               String name = request.getParameter("name");
+               List<Service> list = new ArrayList<>();
+               list = iServiceService.search(name);
+                request.setAttribute("list", list);
+                request.getRequestDispatcher("/display_service.jsp").forward(request, response);
+                break;
+            }
         }
     }
 
@@ -52,9 +71,25 @@ public class ServiceServlet extends HttpServlet {
                 break;
             }
             case "create":{
+                List<RentalType> list = new ArrayList<>();
+                List<TypeService> list1 = new ArrayList<>();
+                list = iServiceService.listRentalType();
+                list1 = iServiceService.listTypeService();
+                request.setAttribute("list", list);
+                request.setAttribute("list1", list1);
                 request.getRequestDispatcher("/create_service.jsp").forward(request, response);
                 response.sendRedirect("/create_service.jsp");
+                break;
             }
+            case "delete":{
+                List<Service> services = new ArrayList<>();
+                services = iServiceService.display();
+                request.setAttribute("list", services);
+                request.getRequestDispatcher("/delete_service.jsp").forward(request, response);
+                response.sendRedirect("/delete_service.jsp");
+                break;
+            }
+
         }
     }
 }

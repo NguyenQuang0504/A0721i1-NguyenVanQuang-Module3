@@ -10,6 +10,7 @@ public class Service {
     private String convinient;
     private Integer numFloor;
     private TypeService typeService;
+    private RentalType rentalType;
 
 
     public Service(Integer id, String name, Integer area, Double cost, Integer numPeople, String standard, String convinient) {
@@ -31,7 +32,7 @@ public class Service {
         this.convinient = convinient;
     }
 
-    public Service(Integer id, String name, Integer area, Double cost, Integer numPeople, String standard, String convinient, TypeService typeService) {
+    public Service(Integer id, String name, Integer area, Double cost, Integer numPeople, String standard, String convinient, TypeService typeService, RentalType rentalType) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -40,6 +41,7 @@ public class Service {
         this.standard = standard;
         this.convinient = convinient;
         this.typeService = typeService;
+        this.rentalType = rentalType;
     }
 
     public Service() {

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -46,8 +47,14 @@
         <input type="text" class="form-control" name="convinient">
     </div>
     <div class="col-md-2">
-        <label class="form-label">Id Type Rent</label>
-        <input type="text" class="form-control" name="idTypeRent">
+        <label class="form-label">Type Rental</label>
+        <select name="idTypeRent">
+            <c:forEach var="rentalType" items="${list}">
+                <option value="${rentalType.idRentalType}">
+                    <c:out value="${rentalType.nameRentalType}"></c:out>
+                </option>
+            </c:forEach>
+        </select>
     </div>
     <div class="col-md-6">
         <label class="form-label">AreaPool</label>
@@ -58,8 +65,14 @@
         <input type="text" class="form-control" name="numFloor">
     </div>
     <div class="col-md-2">
-        <label  class="form-label">Id Type Service</label>
-        <input type="text" class="form-control" name="idServiceType">
+        <label  class="form-label">Type Service</label>
+        <select name="idServiceType">
+            <c:forEach var="serviceType" items="${list1}">
+                <option value="${serviceType.idTypeService}">
+                    <c:out value="${serviceType.typeService}"></c:out>
+                </option>
+            </c:forEach>
+        </select>
     </div>
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Create Service</button>

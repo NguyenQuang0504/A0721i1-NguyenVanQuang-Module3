@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -52,8 +53,14 @@
      <input type="text" class="form-control" placeholder="Address" aria-label="Username" aria-describedby="addon-wrapping" name="address">
  </div>
  <div class="input-group flex-nowrap">
-     <span class="input-group-text">Id_CustomerType</span>
-     <input type="text" class="form-control" placeholder="Id_CustomerType" aria-label="Username" aria-describedby="addon-wrapping" name="idCustomerType">
+     <span class="input-group-text">CustomerType</span>
+     <select name="idCustomerType">
+         <c:forEach var="customertype" items="${list}">
+             <option value="${customertype.id}">
+                 <c:out value="${customertype.nameCustomerType}"></c:out>
+             </option>
+         </c:forEach>
+     </select>
  </div>
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 20px">Create New Customer</button>

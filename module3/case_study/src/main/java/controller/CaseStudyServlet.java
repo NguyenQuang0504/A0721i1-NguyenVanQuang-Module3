@@ -1,6 +1,7 @@
 package controller;
 
 import model.Customer;
+import model.CustomerType;
 import service.ICustomerService;
 import service.Imp.CustomerServiceImp;
 
@@ -81,8 +82,10 @@ public class CaseStudyServlet extends javax.servlet.http.HttpServlet {
                 break;
             }
             case "create":{
+                List<CustomerType> list = new ArrayList<>();
+                list = iCustomerService.findCustomerType();
+                request.setAttribute("list", list);
                 request.getRequestDispatcher("/create_customer.jsp").forward(request, response);
-                response.sendRedirect("/create_customer.jsp");
                 break;
             }
             case "delete":{

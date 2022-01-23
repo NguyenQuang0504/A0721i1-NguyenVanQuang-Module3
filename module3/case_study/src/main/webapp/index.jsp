@@ -25,17 +25,17 @@
             <span class="navbar-toggler-icon">
             </span>
           </button>
-          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="/CaseStudy?action=home">Home</a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Customer</a>
+                <a class="nav-link active" aria-current="page" href="/CaseStudy?action=display">Customer</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Employee</a>
+                <a class="nav-link active" aria-current="page" href="/EmployeeCs?action=display">Employee</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Service</a>
+                <a class="nav-link active" aria-current="page" href="/ServiceServlet?action=display">Service</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Contract</a>
@@ -55,13 +55,13 @@
           <div class="col-md-3 col-xs-0 content-left">
             <div class="list-item">
               <ul>
-                <li><a href="">HOME</a></li>
+                <li><a href="/CaseStudy?action=home">HOME</a></li>
               </ul>
               <ul>
                 <li><a href="/CaseStudy?action=display">CUSTOMER</a></li>
               </ul>
               <ul>
-                <li><a href="">EMPLOYEE</a></li>
+                <li><a href="/EmployeeCs?action=display">EMPLOYEE</a></li>
               </ul>
               <ul>
                 <li><a href="">CONTRACT</a></li>

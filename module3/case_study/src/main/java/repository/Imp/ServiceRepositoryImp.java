@@ -1,6 +1,8 @@
 package repository.Imp;
 
+import model.RentalType;
 import model.Service;
+import model.TypeService;
 import repository.IServiceRepository;
 
 import java.sql.PreparedStatement;
@@ -56,5 +58,101 @@ public class ServiceRepositoryImp implements IServiceRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void delete(String id) {
+        try {
+            Integer ma_ldv = null;
+            Integer ma_kt = null;
+            PreparedStatement preparedStatement1 = this.baseRepository.getConnection()
+                    .prepareStatement("select * from dich_vu where ma_dv = ?");
+            preparedStatement1.setInt(1, Integer.parseInt(id));
+            ResultSet resultSet = preparedStatement1.executeQuery();
+            while (resultSet.next()){
+                ma_ldv = resultSet.getInt("ma_ldv");
+                ma_kt = resultSet.getInt("ma_kt");
+            }
+            PreparedStatement preparedStatement2 = this.baseRepository.getConnection()
+                    .prepareStatement("delete from loai_dich_vu where ma_ldv = ?;");
+            preparedStatement2.setInt(1, ma_ldv);
+            PreparedStatement preparedStatement3 = this.baseRepository.getConnection()
+                    .prepareStatement("delete from kieu_thue where ma_kt = ?;");
+            preparedStatement2.setInt(1, ma_kt);
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("delete from dich_vu where ma_dv = ?;");
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Service> search(String name) {
+        ArrayList<Service> list = new ArrayList<>();
+        Service service = new Service();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from dich_vu where ten_dv like ?;");
+            preparedStatement.setString(1, "%" +name +"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                service = new Service();
+                service.setId(resultSet.getInt("ma_dv"));
+                service.setName(resultSet.getString("ten_dv"));
+                service.setArea(resultSet.getInt("dien_tich"));
+                service.setCost(resultSet.getDouble("chi_phi"));
+                service.setStandard(resultSet.getString("tieu_chuan_phong"));
+                service.setConvinient(resultSet.getString("tien_nghi"));
+                list.add(service);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<RentalType> listRentalType() {
+        List<RentalType> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from kieu_thue");
+            RentalType rentalType = new RentalType();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                rentalType = new RentalType();
+                rentalType.setIdRentalType(resultSet.getInt("ma_kt"));
+                rentalType.setNameRentalType(resultSet.getString("ten_kt"));
+                list.add(rentalType);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<TypeService> listTypeService() {
+        List<TypeService> list = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("select * from loai_dich_vu");
+            TypeService typeService = new TypeService();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                typeService = new TypeService();
+                typeService.setIdTypeService(resultSet.getInt("ma_ldv"));
+                typeService.setTypeService(resultSet.getString("ten_ldv"));
+                list.add(typeService);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

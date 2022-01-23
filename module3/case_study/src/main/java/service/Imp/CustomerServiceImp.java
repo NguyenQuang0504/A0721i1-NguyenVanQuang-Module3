@@ -1,6 +1,7 @@
 package service.Imp;
 
 import model.Customer;
+import model.CustomerType;
 import repository.ICustomerRepository;
 import repository.Imp.CustomerRepositoryImp;
 import service.ICustomerService;
@@ -33,5 +34,10 @@ public class CustomerServiceImp implements ICustomerService {
     @Override
     public List<Customer> search(String name) {
         return iCustomerRepository.search(name);
+    }
+
+    @Override
+    public List<CustomerType> findCustomerType() {
+        return iCustomerRepository.findCustomerType();
     }
 }
