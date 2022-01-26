@@ -5,11 +5,12 @@ import model.CustomerType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface ICustomerService {
     ArrayList<Customer> display();
 
-    void create(String id, String name, String dateOfBirth, String gender, String cmnd, String phone, String email, String address, String id_cusomerType);
+    Map<String, String> create(String id, String name, String dateOfBirth, String gender, String cmnd, String phone, String email, String address, String id_cusomerType);
 
     void delete(String id);
 

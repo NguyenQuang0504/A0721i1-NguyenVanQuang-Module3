@@ -7,7 +7,9 @@ import service.Imp.CustomerServiceImp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @javax.servlet.annotation.WebServlet(name = "CaseStudyServlet", urlPatterns = {"/CaseStudy"})
 public class CaseStudyServlet extends javax.servlet.http.HttpServlet {
@@ -25,12 +27,27 @@ public class CaseStudyServlet extends javax.servlet.http.HttpServlet {
                 String email = request.getParameter("email");
                 String address = request.getParameter("address");
                 String id_cusomerType = request.getParameter("idCustomerType");
-                iCustomerService.create(id, name, dateOfBirth, gender, cmnd, phone, email, address, id_cusomerType);
-                ArrayList<Customer> customerList = new ArrayList<>();
-                customerList = iCustomerService.display();
-                request.setAttribute("listCustomer", customerList);
-                request.getRequestDispatcher("/display_Customer.jsp").forward(request, response);
-                break;
+                Map<String, String> Mess = new HashMap<>();
+                Mess = iCustomerService.create(id, name, dateOfBirth, gender, cmnd, phone, email, address, id_cusomerType);
+                if (Mess.isEmpty()){
+                    ArrayList<Customer> customerList = new ArrayList<>();
+                    customerList = iCustomerService.display();
+                    request.setAttribute("listCustomer", customerList);
+                    request.getRequestDispatcher("/display_Customer.jsp").forward(request, response);
+                    break;
+                }
+                else {
+                    String phoneNum = phone;
+                    List<CustomerType> list = new ArrayList<>();
+                    list = iCustomerService.findCustomerType();
+                    request.setAttribute("phone", phoneNum);
+                    String note = Mess.get("mess");
+                    request.setAttribute("mess", note);
+                    request.setAttribute("list", list);
+                    request.getRequestDispatcher("/create_customer.jsp").forward(request, response);
+                    break;
+                }
+
             }
             case "delete":{
                 String id = request.getParameter("id");
