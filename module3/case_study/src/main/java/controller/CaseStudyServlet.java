@@ -38,10 +38,14 @@ public class CaseStudyServlet extends javax.servlet.http.HttpServlet {
                 }
                 else {
                     String phoneNum = phone;
+                    String email1 = email;
                     List<CustomerType> list = new ArrayList<>();
                     list = iCustomerService.findCustomerType();
+                    request.setAttribute("email", email1);
                     request.setAttribute("phone", phoneNum);
                     String note = Mess.get("mess");
+                    String noteEmail = Mess.get("mess1");
+                    request.setAttribute("mess1", noteEmail);
                     request.setAttribute("mess", note);
                     request.setAttribute("list", list);
                     request.getRequestDispatcher("/create_customer.jsp").forward(request, response);

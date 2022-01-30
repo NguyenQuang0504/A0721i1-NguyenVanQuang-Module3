@@ -101,7 +101,13 @@ public class MatBangRepository implements IMatBangRepository {
 
     @Override
     public void delete(String id) {
-//        PreparedStatement preparedStatement = this.baseRepository.getConnection()
-//                .prepareStatement("delete from ")
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
+                    .prepareStatement("delete from mat_bang where ?;");
+            preparedStatement.setString(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

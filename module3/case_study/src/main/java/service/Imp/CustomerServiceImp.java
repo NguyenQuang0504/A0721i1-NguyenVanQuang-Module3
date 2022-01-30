@@ -26,10 +26,10 @@ public class CustomerServiceImp implements ICustomerService {
         if (phone.matches(REGEX_SDT)&&email.matches(REGEX_EMAIL)) {
             iCustomerRepository.create(id, name, dateOfBirth, gender, cmnd, phone, email, address, id_cusomerType);
         }
-        else if(phone.matches(REGEX_SDT)) {
+        if(!phone.matches(REGEX_SDT)) {
             mess.put("mess","So dien thoai khong chinh xac");
         }
-        else if(email.matches(REGEX_EMAIL)){
+        if(!email.matches(REGEX_EMAIL)){
             mess.put("mess1", "Email khong dung dinh dang");
         }
         return mess;

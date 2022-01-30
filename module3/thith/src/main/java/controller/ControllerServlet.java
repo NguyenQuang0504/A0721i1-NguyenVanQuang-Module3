@@ -53,6 +53,8 @@ public class ControllerServlet extends javax.servlet.http.HttpServlet {
             case "delete":{
                 String id = request.getParameter("id");
                 iMatBangService.delete(id);
+                request.getRequestDispatcher("/display.jsp").forward(request, response);
+                break;
             }
         }
     }
